@@ -1,7 +1,9 @@
 Baixe o MinGW acessando SourceForge, clique depois em Installer e em seguida clique em mingw-get-setup.exe, espere o download finalizar, e execute o aplicativo;
 
-Para testar se deu certo, abra o Prompt de Comando e digite “gcc”.;
+Abra um terminal e navegue até o diretório onde seu arquivo de código-fonte está armazenado.
 
-Para compilar o Projeto, abra o Prompt de Comando e digite "gcc main.c -o main.exe";
+Compile o programa usando o comando g++ seguido pelo nome do arquivo de código-fontem, você pode executar o seguinte comando:
 
-Agora pra executar digite "main.exe".
+g++ main.cpp -0 main
+
+Se o compilador não encontrar nenhum erro, um arquivo executável será gerado no mesmo diretório. Para executar o programa, basta digitar ./main no terminal.
