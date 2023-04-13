@@ -31,30 +31,33 @@ void keyboard(int key, int x, int y) {
     Point& last_point = points.back();
 
     switch (key) {
-        case GLUT_KEY_LEFT:
-            last_point.x -= 5;
-            break;
-        case GLUT_KEY_RIGHT:
-            last_point.x += 5;
-            break;
-        case GLUT_KEY_UP:
-            last_point.y -= 5;
-            break;
-        case GLUT_KEY_DOWN:
-            last_point.y += 5;
-            break;
+    case GLUT_KEY_LEFT:
+        last_point.x -= 5;
+        break; as
+    case GLUT_KEY_RIGHT:
+        last_point.x += 5;
+        break;
+    case GLUT_KEY_UP:
+        last_point.y -= 5;
+        break;
+    case GLUT_KEY_DOWN:
+        last_point.y += 5;
+        break;
     }
 
     glutPostRedisplay();
 }
 
 void mouse(int button, int state, int x, int y) {
+
+    Point& NextPoint = points.back();
+
     if (state != GLUT_DOWN) return;
 
     if (button == GLUT_LEFT_BUTTON) { // ADD PONTO NO VERTOR
-        points.push_back({x, y});
-}
-else if (button == GLUT_RIGHT_BUTTON) { //REMOVE PONTO
+        points.push_back({ x, y });
+    }
+    else if (button == GLUT_RIGHT_BUTTON) { //REMOVE PONTO
 
         int min_distance = std::numeric_limits<int>::max();
         int closest_index = -1;
@@ -67,6 +70,8 @@ else if (button == GLUT_RIGHT_BUTTON) { //REMOVE PONTO
         }
         if (closest_index != -1) {
             points.erase(points.begin() + closest_index);
+            NextPoint = points[closest_index];
+            points.push_back({ NextPoint.x, NextPoint.y });
         }
     }
 
