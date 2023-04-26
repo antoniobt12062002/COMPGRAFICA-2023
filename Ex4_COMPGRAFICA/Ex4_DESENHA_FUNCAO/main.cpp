@@ -1,6 +1,4 @@
 #include <GL/glut.h>
-#include <iostream>
-#include <stdio.h>
 #include <math.h>
 
 void display(void) {
