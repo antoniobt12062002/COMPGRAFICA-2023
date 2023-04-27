@@ -9,7 +9,7 @@ void desenhaCirculo(int x, int y, int raio) {
     double angulo = 0;
     for (double i = 0; i <= 360; i++) {
         glVertex2i(x + raio * cos(angulo), y + raio * sin(angulo)); // adiciona um vértice com coordenadas calculadas a partir do ângulo atual
-        angulo = i * (M_PI / 360); // atualiza o ângulo em radianos
+        angulo = i * (3.14 / 360);
     }
     glEnd();
 }
@@ -22,9 +22,9 @@ void desenhaLinha(int x1, int y1, int x2, int y2) {
 }
 
 void desenhaLagrima(int x, int y, int raio) {
-    desenhaLinha(x, y - 90, x - raio, y); // desenha a primeira linha da lágrima
+    desenhaLinha(x, y - 60, x - 30, y); // desenha a primeira linha da lágrima
     desenhaCirculo(x, y, raio); // desenha o círculo da lágrima
-    desenhaLinha(x, y - 90, x + raio, y); // desenha a segunda linha da lágrima
+    desenhaLinha(x, y - 60, x + 30, y); // desenha a segunda linha da lágrima
 }
 
 void display(void) {
