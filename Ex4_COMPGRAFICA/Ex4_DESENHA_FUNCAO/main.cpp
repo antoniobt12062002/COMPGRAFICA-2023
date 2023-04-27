@@ -9,7 +9,7 @@ void display(void) {
 
     for (float x = -10; x <= 10; x += 0.1) {
         float y = sin(x) * cos(x); // função escolhida
-        glVertex2f(50 * x + 250, 50 * y + 250); // mapeando a escala do gráfico para a janela
+        glVertex2f(50 * x + 100, 50 * y + 100); // escala do gráfico para a janela
     }
 
     glEnd();
