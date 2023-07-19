@@ -1,0 +1,17 @@
+Instruções para controle do objeto 3D utilizando teclado
+
+Este programa OpenGL permite visualizar um objeto 3D carregado a partir de um arquivo .obj e realizar transformações no objeto usando as seguintes teclas:
+
+'x' e 'X': Realizam a translação no eixo X. Pressionar 'x' desloca o objeto para a esquerda e pressionar 'X' desloca o objeto para a direita.
+
+'y' e 'Y': Realizam a translação no eixo Y. Pressionar 'y' desloca o objeto para baixo e pressionar 'Y' desloca o objeto para cima.
+
+'z' e 'Z': Realizam a translação no eixo Z. Pressionar 'z' desloca o objeto para trás e pressionar 'Z' desloca o objeto para frente.
+
+'r' e 'R': Realizam a rotação em torno do eixo X. Pressionar 'r' faz a rotação no sentido anti-horário (olhando o eixo de rotação) e pressionar 'R' faz a rotação no sentido horário.
+
+'u' e 'U': Realizam a rotação em torno do eixo Y. Pressionar 'u' faz a rotação no sentido anti-horário e pressionar 'U' faz a rotação no sentido horário.
+
+'w' e 'W': Realizam a rotação em torno do eixo Z. Pressionar 'w' faz a rotação no sentido anti-horário e pressionar 'W' faz a rotação no sentido horário.
+
+'s' e 'S': Realizam a escala do objeto. Pressionar 's' diminui a escala do objeto e pressionar 'S' aumenta a escala do objeto.
