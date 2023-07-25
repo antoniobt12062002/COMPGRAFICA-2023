@@ -1,0 +1,31 @@
+PARA EXEC NO LINUX: g++ -o main main.cpp -lglut -lGL -lGLU
+./main nome_do_desenho.obj
+case 'r':
+Rotação da câmera em torno do seu eixo de visão.
+A câmera realiza um roll (inclinação lateral).
+O ângulo de inclinação é de -1 grau.
+
+case 'R':
+Rotação da câmera em torno do seu eixo de visão.
+A câmera realiza um roll (inclinação lateral).
+O ângulo de inclinação é de 1 grau.
+
+case 'u':
+Rotação da câmera em torno do seu eixo horizontal (u).
+A câmera realiza um pitch (inclinação vertical para cima).
+O ângulo de inclinação é de -1 grau.
+
+case 'U':
+Rotação da câmera em torno do seu eixo horizontal (u).
+A câmera realiza um pitch (inclinação vertical para cima).
+O ângulo de inclinação é de 1 grau.
+
+case 'w':
+Rotação da câmera em torno do seu eixo de visão.
+A câmera realiza um yaw (rotação horizontal).
+O ângulo de rotação é de -1 grau.
+
+case 'W':
+Rotação da câmera em torno do seu eixo de visão.
+A câmera realiza um yaw (rotação horizontal).
+O ângulo de rotação é de 1 grau.
