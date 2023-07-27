@@ -48,7 +48,9 @@ public:
     void pitch(float angle);
     void yaw(float angle);
     void setShape(float vAng, float asp, float nearD, float farD);
-    void applyTransformations(); // Função para definir a matriz de visualização da câmera
+    void applyTransformations();
+    void ZoomIn(float AnguloMais);
+    void ZoomOut(float AnguloMenos);
 };
 
 void Camera::setShape(float vAngle, float asp, float nearD, float farD) {
@@ -134,6 +136,16 @@ void Camera::yaw(float angle) {
     u = Vertice(sn * t.EixoX + cs * u.EixoX, sn * t.EixoY + cs * u.EixoY,
           sn * t.EixoZ + cs * u.EixoZ);
     applyTransformations();
+}
+
+void Camera::ZoomIn(float AnguloMenos) {
+    viewAngle -= AnguloMenos;
+    setShape(viewAngle, aspect, nearDist, farDist);
+}
+
+void Camera::ZoomOut(float AnguloMais) {
+    viewAngle += AnguloMais;
+    setShape(viewAngle, aspect, nearDist, farDist);
 }
 
 // Código do objeto 3D
@@ -249,6 +261,13 @@ void keyboard(unsigned char key, int x, int y) {
         case 'W':
             camera.yaw(1.0f);
             break;
+        // Zoom da câmera
+        case 'i': // Tecla 'i' para ZoomIn
+            camera.ZoomIn(1.0f); // Pode ajustar o valor do ângulo para um zoom mais rápido ou lento
+            break;
+        case 'o': // Tecla 'o' para ZoomOut
+            camera.ZoomOut(1.0f); // Pode ajustar o valor do ângulo para um zoom mais rápido ou lento
+            break;
         default:
             break;
     }
@@ -260,7 +279,7 @@ void display() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glColor3f(1.0, 1.0, 1.0);
 
-    camera.applyTransformations(); // Usar a função applyTransformations() em vez de gluLookAt()
+    camera.applyTransformations(); // Usar a função applyTransformations()
 
     drawObjLineStrip();
 
@@ -285,7 +304,7 @@ int main(int argc, char** argv) {
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
     glutInitWindowSize(400, 400);
     glutCreateWindow("Cubo!");
-    glOrtho(-2, 2, -2, 2, -10, 10);
+    glOrtho(-100, 100, -100, 100, -10, 10);
     glutDisplayFunc(display);
     glutReshapeFunc(reshape);
     glutKeyboardFunc(keyboard);
@@ -293,11 +312,11 @@ int main(int argc, char** argv) {
     loadObjFile(argv[1]);
 
     glEnable(GL_DEPTH_TEST);
-    camera.setShape(45, 1.7, 1, 100);
+    camera.setShape(180, 1.7, 1, 100);
     Vertice v1(0, 0, 30); // Posição da câmera (x, y, z)
     Vertice v2(0, 0, 0); // Ponto de interesse para onde a câmera está olhando (x, y, z)
     Vertice v3(0, 1, 0); // Vetor "up" da câmera (x, y, z)
     camera.set(v1, v2, v3);
     glutMainLoop();
     return 0;
-}
+}   
