@@ -14,31 +14,46 @@ struct Vertex {
 std::vector<Vertex> vertices;
 std::vector<std::vector<int>> faces;
 
-void loadObjFile(const char* filename) {
+void loadObjFile(const char *filename)
+{
     std::ifstream file(filename);
-    if (!file.is_open()) {
+    if (!file.is_open())
+    {
         std::cerr << "Error opening file: " << filename << std::endl;
         exit(1);
     }
 
     std::string line;
-    while (std::getline(file, line)) {
+    while (std::getline(file, line))
+    {
         std::istringstream iss(line);
         char trash;
 
-        if (line.substr(0, 2) == "v ") {
+        if (line.substr(0, 2) == "v ")
+        {
             float x, y, z;
             iss >> trash >> x >> y >> z;
             vertices.push_back(Vertex(x, y, z));
-        } else if (line.substr(0, 2) == "f ") {
+        }
+        else if (line.substr(0, 2) == "f ")
+        {
             std::vector<int> faceIndices;
-            int vIndex;
+            int vIndex, tIndex, nIndex;
             iss >> trash;
 
-            while (iss >> vIndex) {
+            while (iss >> vIndex)
+            {
                 faceIndices.push_back(vIndex - 1);
-                if (iss.peek() == '/') {
-                    iss.ignore(2, ' ');
+
+                if (iss.peek() == '/')
+                {
+                    iss.ignore();
+                    if (iss.peek() != '/')
+                    {
+                        iss >> tIndex;
+                    }
+                    iss.ignore();
+                    iss >> nIndex;
                 }
             }
 
