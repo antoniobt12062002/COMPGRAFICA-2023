@@ -280,7 +280,7 @@ int main(int argc, char **argv) {
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
     glutInitWindowSize(800, 600);
     glOrtho(-5.5, 5, -5, 5, -10, 10);
-    glutCreateWindow("MANIPULACAO DE LUZES");
+    glutCreateWindow("MANIPULACAO DE MOUSE");
     gluLookAt(-5.5,-5,10,0,0,0,0,1,0);
     glutDisplayFunc(display);
     glutPassiveMotionFunc(mouseMove);
