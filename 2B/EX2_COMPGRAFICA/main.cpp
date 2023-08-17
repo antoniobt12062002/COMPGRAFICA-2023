@@ -148,6 +148,7 @@ void Camera::ZoomOut(float AnguloMais) {
     setShape(viewAngle, aspect, nearDist, farDist);
 }
 
+
 // Código do objeto 3D
 
 struct Vertex {
@@ -169,6 +170,31 @@ std::vector<Vertex> vertices;
 std::vector<Normal> normals;
 std::vector<TextureCoord> texCoords;
 std::vector<std::vector<int>> faces;
+
+Vertex calculateCenterOfMass() {
+    float sumX = 0.0f, sumY = 0.0f, sumZ = 0.0f;
+    int numVertices = vertices.size();
+
+    for (const Vertex& vertex : vertices) {
+        sumX += vertex.x;
+        sumY += vertex.y;
+        sumZ += vertex.z;
+    }
+
+    float centerX = sumX / numVertices;
+    float centerY = sumY / numVertices;
+    float centerZ = sumZ / numVertices;
+
+    return Vertex(centerX, centerY, centerZ);
+}
+
+void scale(const Vertex& center, float sx, float sy, float sz) {
+    for (Vertex& vertex : vertices) {
+        vertex.x = center.x + (vertex.x - center.x) * sx;
+        vertex.y = center.y + (vertex.y - center.y) * sy;
+        vertex.z = center.z + (vertex.z - center.z) * sz;
+    }
+}
 
 void loadObjFile(const char* filename) {
     std::ifstream file(filename);
@@ -222,6 +248,7 @@ void loadObjFile(const char* filename) {
     file.close();
 }
 
+
 void drawObjLineStrip() {
     glBegin(GL_LINE_STRIP);
     for (const std::vector<int>& face : faces) {
@@ -241,6 +268,7 @@ Camera camera;
 
 // Função de callback para controle das transformações da câmera via teclado
 void keyboard(unsigned char key, int x, int y) {
+    Vertex center = calculateCenterOfMass();
     switch (key) {
         // Rotação da câmera
         case 'r':
@@ -267,6 +295,12 @@ void keyboard(unsigned char key, int x, int y) {
             break;
         case 'o': // Tecla 'o' para ZoomOut
             camera.ZoomOut(1.0f); // Pode ajustar o valor do ângulo para um zoom mais rápido ou lento
+            break;
+        case 'p':
+            scale(center, 0.9f, 0.9f, 0.9f);
+            break;
+        case 'P':
+            scale(center, 1.1f, 1.1f, 1.1f);
             break;
         default:
             break;
@@ -300,11 +334,11 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-    glutInit(&argc, argv);
+glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
-    glutInitWindowSize(400, 400);
+    glutInitWindowSize(800, 800);
     glutCreateWindow("Cubo!");
-    glOrtho(-100, 100, -100, 100, -10, 10);
+    glOrtho(-2, 2, -2, 2, -10, 10);
     glutDisplayFunc(display);
     glutReshapeFunc(reshape);
     glutKeyboardFunc(keyboard);
@@ -312,11 +346,11 @@ int main(int argc, char** argv) {
     loadObjFile(argv[1]);
 
     glEnable(GL_DEPTH_TEST);
-    camera.setShape(180, 1.7, 1, 100);
-    Vertice v1(0, 0, 30); // Posição da câmera (x, y, z)
-    Vertice v2(0, 0, 0); // Ponto de interesse para onde a câmera está olhando (x, y, z)
+    camera.setShape(60, 1.0, 1, 1000); 
+    Vertice v1(0, 0, 5); // Posição da câmera (x, y, z) - agora está fora do cubo
+    Vertice v2(0, 0, 0); // Ponto de interesse para onde a câmera está olhando (x, y, z) - apontando para o centro do cubo
     Vertice v3(0, 1, 0); // Vetor "up" da câmera (x, y, z)
     camera.set(v1, v2, v3);
     glutMainLoop();
     return 0;
-}   
+}
